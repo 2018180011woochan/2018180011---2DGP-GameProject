@@ -5,4 +5,4 @@ class BackGround1:
         self.image = load_image('Stage1_Background.png')
 
     def draw(self):
-        self.image.draw(400, 30)
+        self.image.draw(400, 300)
