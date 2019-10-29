@@ -25,10 +25,7 @@ class IdleState:
             sunny.velocity -= 1
         elif event == LEFT_UP:
             sunny.velocity += 1
-        if sunny.x > 570:
-            sunny.x = 570
-        elif sunny.x < 230:
-            sunny.x = 230
+
 
     @staticmethod
     def exit(sunny, event):
@@ -43,6 +40,7 @@ class IdleState:
     @staticmethod
     def draw(sunny):
         sunny.image.draw(sunny.x, sunny.y)
+
 
 class Sunny:
 
