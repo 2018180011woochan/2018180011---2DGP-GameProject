@@ -7,8 +7,8 @@ class Enemy1:
         self.image = load_image('Enemy1.png')
 
     def draw(self):
-        self.image.draw(270, self.y)
-        self.image.draw(530, self.y)
+        self.image.draw(80, self.y)
+        self.image.draw(320, self.y)
 
     def update(self):
         self.y -= self.dir

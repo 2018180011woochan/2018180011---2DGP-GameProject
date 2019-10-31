@@ -1,5 +1,7 @@
 from pico2d import*
 
+import game_world
+
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE = range(5)
 
 key_event_table = {
@@ -15,12 +17,12 @@ class IdleState:
     def enter(sunny, event):
         if event == RIGHT_DOWN:
             sunny.velocity += 1
-            if sunny.x > 570:
-                sunny.x = 570
+            if sunny.x > 330:
+                sunny.x = 330
         elif event == LEFT_DOWN:
             sunny.velocity -= 1
-            if sunny.x < 230:
-                sunny.x = 230
+            if sunny.x < 0:
+                sunny.x = 0
         elif event == RIGHT_UP:
             sunny.velocity -= 1
         elif event == LEFT_UP:
@@ -45,7 +47,7 @@ class IdleState:
 class Sunny:
 
     def __init__(self):
-        self.x, self.y = 400, 100
+        self.x, self.y = 200, 70
         self.dir = 1
         self.velocity = 0
         self.event_que = []

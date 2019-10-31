@@ -2,9 +2,11 @@ import random
 import json
 import os
 
+
 from pico2d import *
 
 import game_framework
+import game_world
 
 from BackGround1 import BackGround1
 from Sunny import Sunny
@@ -29,6 +31,11 @@ def enter():
     Enemy1 = Enemy1()
     Enemy2 = Enemy2()
     Bullet = Bullet()
+    game_world.add_object(BackGround1, 0)
+    game_world.add_object(Sunny, 1)
+    game_world.add_object(Enemy1, 2)
+    game_world.add_object(Enemy2, 3)
+    game_world.add_object(Bullet, 4)
 
 def exit():
     global Sunny, BackGround1, Enemy1, Enemy2, Bullet
@@ -37,6 +44,7 @@ def exit():
     del Enemy1
     del Enemy2
     del Bullet
+    game_world.clear()
 
 def pause():
     pass
@@ -56,16 +64,12 @@ def handle_events():
             Sunny.handle_event(event)
 
 def update():
-    Sunny.update()
-    Enemy1.update()
-    Enemy2.update()
-    Bullet.update()
+    for game_object in game_world.all_objects():
+        game_object.update()
+    update_canvas()
 
 def draw():
     clear_canvas()
-    BackGround1.draw()
-    Sunny.draw()
-    Bullet.draw()
-    Enemy1.draw()
-    Enemy2.draw()
+    for game_object in game_world.all_objects():
+        game_object.draw()
     update_canvas()

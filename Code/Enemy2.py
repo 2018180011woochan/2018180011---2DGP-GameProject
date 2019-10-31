@@ -8,7 +8,7 @@ class Enemy2:
 
 
     def draw(self):
-        self.image.draw(400, self.y)
+        self.image.draw(200, self.y)
 
     def update(self):
         self.y -= self.dir

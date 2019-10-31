@@ -4,7 +4,7 @@ from Sunny import Sunny
 
 class Bullet:
     def __init__(self):
-        self.x = 400
+        self.x = 200
         self.y = 100
         self.dir = 1
         self.image = load_image('Bullet.png')
