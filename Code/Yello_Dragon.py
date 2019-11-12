@@ -1,8 +1,8 @@
 from pico2d import*
 
-class Enemy2:
+class Yello_Dragon:
     def __init__(self):
-        self.image = load_image('Enemy2.png')
+        self.image = load_image('Yello_Dragon.png')
         self.y = 650
         self.dir = 0.15
 

@@ -10,8 +10,8 @@ import game_world
 
 from BackGround1 import BackGround1
 from Sunny import Sunny
-from Enemy1 import Enemy1
-from Enemy2 import Enemy2
+from White_Dragon import White_Dragon
+from Yello_Dragon import Yello_Dragon
 from Bullet import Bullet
 
 
@@ -19,30 +19,30 @@ name = "MainState"
 
 sunny = None
 background1 = None
-enemy1 = None
-enemy2 = None
+white_dragon = None
+yello_dragon = None
 bullet = None
 
 
 def enter():
-    global Sunny, BackGround1, Enemy1, Enemy2, Bullet
+    global Sunny, BackGround1, White_Dragon, Yello_Dragon, Bullet
     Sunny = Sunny()
     BackGround1 = BackGround1()
-    Enemy1 = Enemy1()
-    Enemy2 = Enemy2()
+    White_Dragon = White_Dragon()
+    Yello_Dragon = Yello_Dragon()
     Bullet = Bullet()
     game_world.add_object(BackGround1, 0)
     game_world.add_object(Sunny, 1)
-    game_world.add_object(Enemy1, 2)
-    game_world.add_object(Enemy2, 3)
+    game_world.add_object(White_Dragon, 2)
+    game_world.add_object(Yello_Dragon, 3)
     game_world.add_object(Bullet, 4)
 
 def exit():
-    global Sunny, BackGround1, Enemy1, Enemy2, Bullet
+    global Sunny, BackGround1, White_Dragon, Yello_Dragon, Bullet
     del sunny
     del BackGround1
-    del Enemy1
-    del Enemy2
+    del White_Dragon
+    del Yello_Dragon
     del Bullet
     game_world.clear()
 
