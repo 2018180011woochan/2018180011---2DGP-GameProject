@@ -1,6 +1,7 @@
 from pico2d import*
-
+import game_framework
 import game_world
+from Bullet import Bullet
 
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE = range(5)
 
@@ -31,6 +32,8 @@ class IdleState:
 
     @staticmethod
     def exit(sunny, event):
+        if event == SPACE:
+            sunny.fire_bullet()
         pass
 
     @staticmethod
@@ -54,6 +57,10 @@ class Sunny:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.image = load_image('Player_Sunny.png')
+
+    def fire_bullet(self):
+        bullet = Bullet(self.x, self.y, self.dir)
+        game_world.add_object(bullet, 1)
 
     def update_state(self):
         if len(self.event_que) > 0:
