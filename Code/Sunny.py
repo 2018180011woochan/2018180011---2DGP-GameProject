@@ -3,6 +3,12 @@ import game_framework
 import game_world
 from Bullet import Bullet
 
+PIXEL_PER_METER = (10.0 / 1.0)
+RUN_SPEED_KMPH = 2.0
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
+RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
+
 RIGHT_DOWN, LEFT_DOWN, RIGHT_UP, LEFT_UP, SPACE = range(5)
 
 key_event_table = {
@@ -17,17 +23,17 @@ class IdleState:
     @staticmethod
     def enter(sunny, event):
         if event == RIGHT_DOWN:
-            sunny.velocity += 1
+            sunny.velocity += RUN_SPEED_PPS
             if sunny.x > 330:
                 sunny.x = 330
         elif event == LEFT_DOWN:
-            sunny.velocity -= 1
+            sunny.velocity -= RUN_SPEED_PPS
             if sunny.x < 0:
                 sunny.x = 0
         elif event == RIGHT_UP:
-            sunny.velocity -= 1
+            sunny.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
-            sunny.velocity += 1
+            sunny.velocity += RUN_SPEED_PPS
 
 
     @staticmethod
