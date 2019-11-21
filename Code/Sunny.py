@@ -4,7 +4,7 @@ import game_world
 from Bullet import Bullet
 
 PIXEL_PER_METER = (10.0 / 1.0)
-RUN_SPEED_KMPH = 2.0
+RUN_SPEED_KMPH = 100.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
@@ -34,7 +34,7 @@ class IdleState:
             sunny.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             sunny.velocity += RUN_SPEED_PPS
-
+        sunny.dir = clamp(-1, sunny.velocity, 1)
 
     @staticmethod
     def exit(sunny, event):
@@ -44,7 +44,7 @@ class IdleState:
 
     @staticmethod
     def do(sunny):
-        sunny.x += sunny.velocity
+        sunny.x += sunny.velocity * game_framework.frame_time
         sunny.x = clamp(25, sunny.x, 800 - 25)
         pass
 
@@ -68,6 +68,7 @@ class Sunny:
         bullet = Bullet(self.x, self.y, self.dir)
         game_world.add_object(bullet, 1)
 
+
     def update_state(self):
         if len(self.event_que) > 0:
             event = self.event_que.pop()
@@ -89,6 +90,9 @@ class Sunny:
             self.cur_state.exit(self, event)
             self.cur_state.enter(self, event)
         pass
+
+    def get_bb(self):
+        return self.x-20, self.y-20, self.x+20, self.y+20
 
     def draw(self):
         self.cur_state.draw(self)

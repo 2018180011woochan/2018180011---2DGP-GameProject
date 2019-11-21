@@ -16,9 +16,11 @@ class Bullet:
         if Bullet.image == None:
             Bullet.image = load_image('Bullet.png')
 
+    def get_bb(self):
+        return self.x-5, self.y-5, self.x+5, self.y+5
+
     def draw(self):
         self.image.draw(self.x, self.y)
-
 
     def update(self):
         self.y += RUN_SPEED_PPS
