@@ -9,14 +9,16 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 class Yello_Dragon:
     def __init__(self):
         self.image = load_image('Yello_Dragon.png')
+        self.x = 200
         self.y = 650
         self.dir = 0.15
 
     def get_bb(self):
-        return self.x - 20, self.y - 20, self.x + 20, self.y + 20
+        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
 
     def draw(self):
-        self.image.draw(200, self.y)
+        self.image.draw(self.x, self.y)
+        draw_rectangle(*self.get_bb())
 
     def update(self):
         self.y -= RUN_SPEED_PPS
