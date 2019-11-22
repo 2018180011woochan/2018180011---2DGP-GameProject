@@ -96,6 +96,7 @@ class Sunny:
 
     def draw(self):
         self.cur_state.draw(self)
+        draw_rectangle(*self.get_bb())
 
 
 

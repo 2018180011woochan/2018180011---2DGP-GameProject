@@ -8,9 +8,9 @@ def add_object(o, layer):
     objects[layer].append(o)
 
 def add_objects(l, layer):
-    #for o in l:
-    #   add_object(o, layer)
-    objects[layer] += l
+    for o in l:
+        add_object(o, layer)
+    #objects[layer] += l
 
 
 def remove_object(o):
