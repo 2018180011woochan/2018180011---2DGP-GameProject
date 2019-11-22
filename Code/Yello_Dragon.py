@@ -10,12 +10,12 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 class Yello_Dragon:
     image = None
-    def __init__(self):
+    def __init__(self, x = 200, y = 650, dir = 0.15):
         if Yello_Dragon.image == None:
             Yello_Dragon.image = load_image('Yello_Dragon.png')
-        self.x = 200
-        self.y = 650
-        self.dir = 0.15
+        self.x = x
+        self.y = y
+        self.dir = dir
 
     def get_bb(self):
         return self.x - 50, self.y - 50, self.x + 50, self.y + 50
@@ -26,3 +26,7 @@ class Yello_Dragon:
 
     def update(self):
         self.y -= RUN_SPEED_PPS
+
+    def remake_yellodragon(self):
+        yello_dragon = Yello_Dragon(self.x, self.y, self.dir)
+        game_world.add_object(yello_dragon, 1)

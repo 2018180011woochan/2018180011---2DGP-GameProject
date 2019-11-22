@@ -24,6 +24,7 @@ class IdleState:
     def enter(sunny, event):
         if event == RIGHT_DOWN:
             sunny.velocity += RUN_SPEED_PPS
+            #Bullet.shooting = True
             if sunny.x > 330:
                 sunny.x = 330
         elif event == LEFT_DOWN:
@@ -67,7 +68,6 @@ class Sunny:
     def fire_bullet(self):
         bullet = Bullet(self.x, self.y, self.dir)
         game_world.add_object(bullet, 1)
-
 
     def update_state(self):
         if len(self.event_que) > 0:

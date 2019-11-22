@@ -1,5 +1,9 @@
 from pico2d import*
 import game_world
+import game_world
+import game_framework
+import RIght_White_Dragon
+import Sunny
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.5
@@ -13,6 +17,7 @@ class Bullet:
         self.x = x
         self.y = y
         self.dir = dir
+        self.shooting = False
         if Bullet.image == None:
             Bullet.image = load_image('Bullet.png')
 
@@ -20,11 +25,23 @@ class Bullet:
         return self.x-10, self.y-10, self.x+10, self.y+20
 
     def draw(self):
-        self.image.draw(self.x, self.y)
+        if self.shooting == True:
+            self.image.draw(self.x, self.y)
         draw_rectangle(*self.get_bb())
 
     def update(self):
-        self.y += RUN_SPEED_PPS
+        if self.shooting == False:
+            self.x = 200
+            self.y = 70
+        if self.shooting == True:
+            self.y += RUN_SPEED_PPS
+            if self.y > 600:
+                self.shooting = False
+                self.x = 200
+                self.y = 70
 
-        if self.y > 600:
-            game_world.remove_object(self)
+        #self.y += RUN_SPEED_PPS
+
+        #if self.y > 600:
+        #    game_world.remove_object(self)
+
