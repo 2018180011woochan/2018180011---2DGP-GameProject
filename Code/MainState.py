@@ -25,7 +25,6 @@ background1 = None
 left_white_dragon = None
 right_white_dragon = None
 yello_dragon = None
-bullet = None
 
 Bullets = []
 
@@ -39,14 +38,12 @@ def collide(a, b):
     return True
 
 def enter():
-    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon, Bullet
+    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon
     Sunny = Sunny()
     BackGround1 = BackGround1()
     Left_White_Dragon = Left_White_Dragon()
     Right_White_Dragon = Right_White_Dragon()
     Yello_Dragon = Yello_Dragon()
-    Bullet = Bullet()
-    game_world.add_object(Bullet, 1)
     game_world.add_object(BackGround1, 0)
     game_world.add_object(Sunny, 1)
     game_world.add_object(Left_White_Dragon, 2)
@@ -54,19 +51,26 @@ def enter():
     game_world.add_object(Yello_Dragon, 3)
 
 
+
 def exit():
-    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon, Bullet
+    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon, Bullets
     del sunny
     del BackGround1
     del Left_White_Dragon
     del Right_White_Dragon
     del Yello_Dragon
-    del Bullet
+    del Bullets
     game_world.clear()
 
 
+def get_yello_dragon():
+    return Yello_Dragon
 
+def get_bullet():
+    return Bullet
 
+def get_sunny():
+    return Sunny
 
 def pause():
     pass
@@ -97,11 +101,8 @@ def update():
     if collide(Sunny, Right_White_Dragon):
         delay(1)
         game_framework.quit()
-    if collide(Bullet, Right_White_Dragon):
-        game_world.remove_object(Right_White_Dragon)
 
-    if get_time() % 5 < 1:
-        Yello_Dragon.remake_yellodragon()
+
 
 
 def draw():

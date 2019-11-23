@@ -1,6 +1,7 @@
 from pico2d import*
 import game_world
 import game_framework
+import MainState
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -25,6 +26,8 @@ class Yello_Dragon:
         draw_rectangle(*self.get_bb())
 
     def update(self):
+        if get_time() > 5:
+            yello_dragon = MainState.get_yello_dragon()
         self.y -= RUN_SPEED_PPS
 
     def remake_yellodragon(self):

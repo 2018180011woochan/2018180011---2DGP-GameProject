@@ -3,6 +3,8 @@ import game_framework
 import game_world
 from Bullet import Bullet
 
+Bullets = []
+
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 100.0
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
@@ -19,34 +21,49 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_SPACE): SPACE
 }
 
+def collide(a, b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+
+
 class IdleState:
     @staticmethod
     def enter(sunny, event):
         if event == RIGHT_DOWN:
             sunny.velocity += RUN_SPEED_PPS
-            #Bullet.shooting = True
+            Bullet.shooting = True
             if sunny.x > 330:
                 sunny.x = 330
         elif event == LEFT_DOWN:
+            Bullet.shooting = True
             sunny.velocity -= RUN_SPEED_PPS
             if sunny.x < 0:
                 sunny.x = 0
         elif event == RIGHT_UP:
+            Bullet.shooting = True
             sunny.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
+            Bullet.shooting = True
             sunny.velocity += RUN_SPEED_PPS
         sunny.dir = clamp(-1, sunny.velocity, 1)
 
     @staticmethod
     def exit(sunny, event):
-        if event == SPACE:
-            sunny.fire_bullet()
         pass
 
     @staticmethod
     def do(sunny):
         sunny.x += sunny.velocity * game_framework.frame_time
         sunny.x = clamp(25, sunny.x, 800 - 25)
+        sunny.bullet_remaketime += game_framework.frame_time * 10
+
+        if int(sunny.bullet_remaketime) >= 3 - sunny.bullet_speed * 1.0:
+            sunny.fire_bullet()
+            sunny.bullet_remaketime = 0
         pass
 
     @staticmethod
@@ -64,10 +81,10 @@ class Sunny:
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
         self.image = load_image('Player_Sunny.png')
+        self.bullet_remaketime = 0
+        self.bullets = []
+        self.bullet_speed = 1
 
-    def fire_bullet(self):
-        bullet = Bullet(self.x, self.y, self.dir)
-        game_world.add_object(bullet, 1)
 
     def update_state(self):
         if len(self.event_que) > 0:
@@ -97,6 +114,9 @@ class Sunny:
     def draw(self):
         self.cur_state.draw(self)
         draw_rectangle(*self.get_bb())
+
+    def fire_bullet(self):
+        self.bullets += [Bullet()]
 
 
 
