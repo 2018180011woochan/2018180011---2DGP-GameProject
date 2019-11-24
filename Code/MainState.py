@@ -9,13 +9,17 @@ import game_framework
 import game_world
 import Sunny
 import Yello_Dragon
+import Bullet
+import Right_White_Dragon
+import EndingState
 
 from BackGround1 import BackGround1
 from Sunny import Sunny
 from Left_White_Dragon import Left_White_Dragon
-from RIght_White_Dragon import Right_White_Dragon
+from Right_White_Dragon import Right_White_Dragon
 from Yello_Dragon import Yello_Dragon
 from Bullet import Bullet
+#from Yello_Dragon import *
 
 
 name = "MainState"
@@ -53,13 +57,12 @@ def enter():
 
 
 def exit():
-    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon, Bullets
+    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon
     del sunny
     del BackGround1
     del Left_White_Dragon
     del Right_White_Dragon
     del Yello_Dragon
-    del Bullets
     game_world.clear()
 
 
@@ -86,21 +89,30 @@ def handle_events():
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             game_framework.quit()
+        elif event.type == SDL_KEYDOWN and event.key == SDLK_SPACE:
+            game_framework.change_state(EndingState)
         else:
             Sunny.handle_event(event)
 
 def update():
     for game_object in game_world.all_objects():
         game_object.update()
-    if collide(Sunny, Yello_Dragon):
+    if Sunny.collide(Yello_Dragon):
         delay(1)
-        game_framework.quit()
-    if collide(Sunny, Left_White_Dragon):
+        game_framework.change_state(EndingState)
+    if Sunny.collide(Left_White_Dragon):
         delay(1)
-        game_framework.quit()
-    if collide(Sunny, Right_White_Dragon):
+        game_framework.change_state(EndingState)
+    if Sunny.collide(Right_White_Dragon):
         delay(1)
-        game_framework.quit()
+        game_framework.change_state(EndingState)
+
+
+    #if collide(Bullet, Yello_Dragon):
+    #   game_framework.quit()
+    #for Bullet in Bullets:
+    #    if collide(Sunny.bullets, Right_White_Dragon):
+    #        game_framework.quit()
 
 
 

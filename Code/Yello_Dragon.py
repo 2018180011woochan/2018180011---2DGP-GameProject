@@ -11,12 +11,15 @@ RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 class Yello_Dragon:
     image = None
-    def __init__(self, x = 200, y = 650, dir = 0.15):
+    def __init__(self):
         if Yello_Dragon.image == None:
             Yello_Dragon.image = load_image('Yello_Dragon.png')
-        self.x = x
-        self.y = y
-        self.dir = dir
+        self.x = 200
+        self.y = 650
+        self.dir = 0.15
+
+
+
 
     def get_bb(self):
         return self.x - 50, self.y - 50, self.x + 50, self.y + 50
@@ -26,10 +29,20 @@ class Yello_Dragon:
         draw_rectangle(*self.get_bb())
 
     def update(self):
-        if get_time() > 5:
-            yello_dragon = MainState.get_yello_dragon()
         self.y -= RUN_SPEED_PPS
 
+        if self.y < 0:
+            game_world.remove_object(self)
+
     def remake_yellodragon(self):
-        yello_dragon = Yello_Dragon(self.x, self.y, self.dir)
-        game_world.add_object(yello_dragon, 1)
+        self.yellodragons += [Yello_Dragon()]
+
+    def collide(self, a):
+        left_a, bottom_a, right_a, top_a = a.get_bb()
+        left_b, bottom_b, right_b, top_b = self.get_bb()
+
+        if left_a > right_b: return False
+        if right_a < left_b: return False
+        if top_a < bottom_b: return False
+        if bottom_a > top_b: return False
+        return True

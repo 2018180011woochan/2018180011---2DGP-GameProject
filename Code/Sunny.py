@@ -2,6 +2,7 @@ from pico2d import*
 import game_framework
 import game_world
 from Bullet import Bullet
+from Yello_Dragon import Yello_Dragon
 
 Bullets = []
 
@@ -20,14 +21,6 @@ key_event_table = {
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYDOWN, SDLK_SPACE): SPACE
 }
-
-def collide(a, b):
-    left_a, bottom_a, right_a, top_a = a.get_bb()
-    left_b, bottom_b, right_b, top_b = b.get_bb()
-    if left_a > right_b: return False
-    if right_a < left_b: return False
-    if top_a < bottom_b: return False
-    if bottom_a > top_b: return False
 
 
 class IdleState:
@@ -57,18 +50,22 @@ class IdleState:
 
     @staticmethod
     def do(sunny):
+        sunny.fly_distance = get_time() * 100
         sunny.x += sunny.velocity * game_framework.frame_time
         sunny.x = clamp(25, sunny.x, 800 - 25)
         sunny.bullet_remaketime += game_framework.frame_time * 10
 
-        if int(sunny.bullet_remaketime) >= 3 - sunny.bullet_speed * 1.0:
+        if int(sunny.bullet_remaketime) >= 3 - sunny.bullet_speed * 0.8:
             sunny.fire_bullet()
             sunny.bullet_remaketime = 0
+
         pass
 
     @staticmethod
     def draw(sunny):
         sunny.image.draw(sunny.x, sunny.y)
+        sunny.font.draw(game_world.WIDTH * 0.7, game_world.HEIGHT - 50,
+                      '%10.0f M' % (sunny.fly_distance - (sunny.fly_distance % 10)), (255, 255, 255))
 
 
 class Sunny:
@@ -83,7 +80,11 @@ class Sunny:
         self.image = load_image('Player_Sunny.png')
         self.bullet_remaketime = 0
         self.bullets = []
-        self.bullet_speed = 1
+        self.bullet_speed = 2
+        self.fly_distance = 0
+        self.kill_score = 0
+        self.font = load_font('ENCR10B.TTF', 30)
+        self.final_score = self.fly_distance + self.kill_score
 
 
     def update_state(self):
@@ -111,12 +112,24 @@ class Sunny:
     def get_bb(self):
         return self.x-20, self.y-20, self.x+20, self.y+20
 
+
     def draw(self):
         self.cur_state.draw(self)
         draw_rectangle(*self.get_bb())
 
     def fire_bullet(self):
         self.bullets += [Bullet()]
+
+
+    def collide(self, a):
+        left_a, bottom_a, right_a, top_a = a.get_bb()
+        left_b, bottom_b, right_b, top_b = self.get_bb()
+        if left_a > right_b: return False
+        if right_a < left_b: return False
+        if top_a < bottom_b: return False
+        if bottom_a > top_b: return False
+        return True
+
 
 
 

@@ -3,6 +3,8 @@
 # layer 1: Foreground Objects
 objects = [[],[],[],[],[]]
 
+WIDTH = 220
+HEIGHT = 550
 
 def add_object(o, layer):
     objects[layer].append(o)
