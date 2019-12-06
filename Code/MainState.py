@@ -69,6 +69,12 @@ def exit():
 def get_yello_dragon():
     return Yello_Dragon
 
+def get_right_white_dragon():
+    return Right_White_Dragon
+
+def get_left_white_dragon():
+    return Left_White_Dragon
+
 def get_bullet():
     return Bullet
 

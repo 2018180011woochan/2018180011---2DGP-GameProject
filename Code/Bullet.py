@@ -28,6 +28,7 @@ class Bullet:
         self.x = Sunny.x
         self.y = 70
         self.shooting = False
+        self.attack = 50
         game_world.add_object(self, 1)
 
     def __del__(self):
@@ -44,13 +45,20 @@ class Bullet:
 
 
     def update(self):
+        yello_dragon = MainState.get_yello_dragon()
+        left_white_dragon = MainState.get_left_white_dragon()
+        right_white_dragon = MainState.get_right_white_dragon()
         # self.y = 70
         self.y += RUN_SPEED_PPS
         if self.y > 600:
             game_world.remove_object(self)
 
-        if collide(Right_White_Dragon, self):
-            game_framework.quit()
+        if collide(left_white_dragon, self):
+            left_white_dragon.hp -= 20
+        if collide(right_white_dragon, self):
+            left_white_dragon.hp -= 20
+        if collide(yello_dragon, self):
+            left_white_dragon.hp -= 20
 
 
 
