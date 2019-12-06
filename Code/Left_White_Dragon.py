@@ -1,5 +1,7 @@
 from pico2d import*
 import game_world
+import Sunny
+import MainState
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -36,6 +38,8 @@ class Left_White_Dragon:
         draw_rectangle(*self.get_bb())
 
     def update(self):
+        sunny = MainState.get_sunny()
         self.y -= RUN_SPEED_PPS
         if self.hp <= 0:
             game_world.remove_object(self)
+            sunny.kill_score += 100

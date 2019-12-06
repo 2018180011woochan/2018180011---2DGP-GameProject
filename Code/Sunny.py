@@ -66,6 +66,8 @@ class IdleState:
         sunny.image.draw(sunny.x, sunny.y)
         sunny.font.draw(game_world.WIDTH * 0.7, game_world.HEIGHT - 50,
                       '%10.0f M' % (sunny.fly_distance - (sunny.fly_distance % 10)), (255, 255, 255))
+        sunny.font.draw(game_world.WIDTH * -0.5, game_world.HEIGHT - 50,
+                        '%10.0f' % (sunny.kill_score - (sunny.kill_score % 10)), (255, 255, 255))
 
 
 class Sunny:

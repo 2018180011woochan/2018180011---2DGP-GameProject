@@ -1,7 +1,8 @@
 from pico2d import*
-
+import game_world
 import MainState
 import game_framework
+import Sunny
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -49,4 +50,8 @@ class Right_White_Dragon:
 
 
     def update(self):
+        sunny = MainState.get_sunny()
         self.y -= RUN_SPEED_PPS
+        if self.hp <= 0:
+            game_world.remove_object(self)
+            sunny.kill_score += 100

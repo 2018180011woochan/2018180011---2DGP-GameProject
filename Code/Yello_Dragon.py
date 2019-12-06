@@ -2,6 +2,7 @@ from pico2d import*
 import game_world
 import game_framework
 import MainState
+import Sunny
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -39,12 +40,14 @@ class Yello_Dragon:
         draw_rectangle(*self.get_bb())
 
     def update(self):
+        sunny = MainState.get_sunny()
         self.y -= RUN_SPEED_PPS
 
         if self.y < 0:
             game_world.remove_object(self)
         if self.hp <= 0:
             game_world.remove_object(self)
+            sunny.kill_score += 100
 
     def get_damage(self, attack):
         self.hp -= attack

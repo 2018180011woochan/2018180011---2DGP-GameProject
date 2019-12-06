@@ -6,7 +6,7 @@ import Right_White_Dragon
 import MainState
 import Sunny
 
-PIXEL_PER_METER = (10.0 / 1.0)
+PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 0.5
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
@@ -54,11 +54,11 @@ class Bullet:
             game_world.remove_object(self)
 
         if collide(left_white_dragon, self):
-            left_white_dragon.hp -= 20
+            left_white_dragon.hp -= 2
         if collide(right_white_dragon, self):
-            left_white_dragon.hp -= 20
+            right_white_dragon.hp -= 2
         if collide(yello_dragon, self):
-            left_white_dragon.hp -= 20
+            yello_dragon.hp -= 2
 
 
 
