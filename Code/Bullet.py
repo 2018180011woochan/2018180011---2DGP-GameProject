@@ -28,7 +28,7 @@ class Bullet:
         self.x = Sunny.x
         self.y = 70
         self.shooting = False
-        self.attack = 50
+        self.attack = 20
         game_world.add_object(self, 1)
 
     def __del__(self):
@@ -54,11 +54,14 @@ class Bullet:
             game_world.remove_object(self)
 
         if collide(left_white_dragon, self):
-            left_white_dragon.hp -= 2
+            game_world.remove_object(self)
+            left_white_dragon.hp -= 20
         if collide(right_white_dragon, self):
-            right_white_dragon.hp -= 2
+            game_world.remove_object(self)
+            right_white_dragon.hp -= 20
         if collide(yello_dragon, self):
-            yello_dragon.hp -= 2
+            game_world.remove_object(self)
+            yello_dragon.hp -= 20
 
 
 
