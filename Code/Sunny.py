@@ -64,9 +64,9 @@ class IdleState:
     @staticmethod
     def draw(sunny):
         sunny.image.draw(sunny.x, sunny.y)
-        sunny.font.draw(game_world.WIDTH * 0.7, game_world.HEIGHT - 50,
+        sunny.font.draw(game_world.WIDTH * 1.1, game_world.HEIGHT - 50,
                       '%10.0f M' % (sunny.fly_distance - (sunny.fly_distance % 10)), (255, 255, 255))
-        sunny.font.draw(game_world.WIDTH * -0.5, game_world.HEIGHT - 50,
+        sunny.font.draw(game_world.WIDTH * -0.2, game_world.HEIGHT - 50,
                         '%10.0f' % (sunny.kill_score - (sunny.kill_score % 10)), (255, 255, 255))
 
 
@@ -85,7 +85,8 @@ class Sunny:
         self.bullet_speed = 2
         self.fly_distance = 0
         self.kill_score = 0
-        self.font = load_font('ENCR10B.TTF', 30)
+        #self.font = load_font('ENCR10B.TTF', 30)
+        self.font = load_font('HoonDdukbokki.TTF', 30)
         self.final_score = self.fly_distance + self.kill_score
 
 

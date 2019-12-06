@@ -12,6 +12,8 @@ import Yello_Dragon
 import Bullet
 import Right_White_Dragon
 import EndingState
+import time
+import threading
 
 from BackGround1 import BackGround1
 from Sunny import Sunny
@@ -101,6 +103,8 @@ def handle_events():
             Sunny.handle_event(event)
 
 def update():
+    global yello_dragon
+    current_time = time.time()
     for game_object in game_world.all_objects():
         game_object.update()
     if Sunny.collide(Yello_Dragon):
@@ -112,6 +116,11 @@ def update():
     if Sunny.collide(Right_White_Dragon):
         delay(1)
         game_framework.change_state(EndingState)
+
+
+    #if Yello_Dragon.isAlive == False:
+    #    game_world.add_object(yello_dragon, 1)
+    #threading.Timer(3, yello_dragon).game_world.add_object(yello_dragon, 1)
 
 
     #if collide(Bullet, Yello_Dragon):

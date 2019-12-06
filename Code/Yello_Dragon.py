@@ -3,6 +3,8 @@ import game_world
 import game_framework
 import MainState
 import Sunny
+import time
+
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -28,6 +30,7 @@ class Yello_Dragon:
         self.y = 650
         self.dir = 0.15
         self.hp = 100
+        self.isAlive = True
 
 
 
@@ -45,12 +48,11 @@ class Yello_Dragon:
 
         if self.y < 0:
             game_world.remove_object(self)
+            self.isAlive = False
         if self.hp <= 0:
             game_world.remove_object(self)
             sunny.kill_score += 100
-
-    def get_damage(self, attack):
-        self.hp -= attack
+            self.isAlive = False
 
     def remake_yellodragon(self):
         self.yellodragons += [Yello_Dragon()]
