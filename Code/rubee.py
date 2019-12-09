@@ -51,7 +51,7 @@ class Rubee:
 
         if collide(self, sunny):
             #sunny = MainState.get_sunny()
-            sunny.kill_score += 50
+            sunny.kill_score += 1
 
     #def remake_yellodragon(self):
      #   self.yellodragons += [Yello_Dragon()]
