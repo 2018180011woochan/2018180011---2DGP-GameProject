@@ -23,7 +23,7 @@ def collide(a, b):
 
 class Boss:
     image = None
-    def __init__(self, x):
+    def __init__(self):
         if Boss.image == None:
             Boss.image = load_image('boss.png')
         self.x = 200

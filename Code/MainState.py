@@ -21,6 +21,7 @@ from Left_White_Dragon import Left_White_Dragon
 from Right_White_Dragon import Right_White_Dragon
 from Yello_Dragon import Yello_Dragon
 from Bullet import Bullet
+from boss import Boss
 #from Yello_Dragon import *
 
 
@@ -28,7 +29,7 @@ name = "MainState"
 
 sunny = None
 background1 = None
-
+boss = None
 
 Bullets = []
 yello_dragons = []
@@ -45,15 +46,17 @@ def collide(a, b):
     return True
 
 def enter():
-    global Sunny, BackGround1
+    global Sunny, BackGround1, boss
     #global Yello_Dragon
     Sunny = Sunny()
     BackGround1 = BackGround1()
+    boss = Boss()
     #Left_White_Dragon = Left_White_Dragon()
     #Right_White_Dragon = Right_White_Dragon()
     #Yello_Dragon = Yello_Dragon()
     game_world.add_object(BackGround1, 0)
     game_world.add_object(Sunny, 1)
+    game_world.add_object(boss, 1)
     #game_world.add_object(Left_White_Dragon, 2)
     #game_world.add_object(Right_White_Dragon, 2)
     #game_world.add_object(Yello_Dragon, 3)
@@ -81,6 +84,8 @@ def exit():
     del Yello_Dragon
     game_world.clear()
 
+def get_boss():
+    return boss
 
 def get_yello_dragons():
     return yello_dragons
