@@ -35,7 +35,7 @@ class Rubee:
 
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        return self.x - 5, self.y - 5, self.x + 5, self.y + 5
 
     def draw(self):
         self.image.draw(self.x, self.y)
@@ -46,13 +46,12 @@ class Rubee:
         self.y -= RUN_SPEED_PPS
 
         if self.y < 0:
-            yello_dragons = MainState.get_yello_dragons()
-            yello_dragons.remove(self)
+            rubee = MainState.get_rubee()
             game_world.remove_object(self)
 
         if collide(self, sunny):
-            delay(1)
-            game_framework.change_state(EndingState)
+            #sunny = MainState.get_sunny()
+            sunny.kill_score += 50
 
     #def remake_yellodragon(self):
      #   self.yellodragons += [Yello_Dragon()]

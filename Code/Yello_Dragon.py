@@ -3,6 +3,7 @@ import game_world
 import game_framework
 import MainState
 import EndingState
+import rubee
 import Sunny
 import time
 
@@ -54,9 +55,12 @@ class Yello_Dragon:
             self.isAlive = False
         if self.hp <= 0:
             yello_dragons = MainState.get_yello_dragons()
+            rubee = MainState.get_rubee()
             yello_dragons.remove(self)
             game_world.remove_object(self)
             sunny.kill_score += 100
+            rubee.x, rubee.y = self.x, self.y
+            game_world.add_object(rubee, 1)
             self.isAlive = False
         if collide(self, sunny):
             delay(1)
