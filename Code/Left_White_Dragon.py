@@ -2,6 +2,8 @@ from pico2d import*
 import game_world
 import Sunny
 import MainState
+import EndingState
+import game_framework
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -51,3 +53,7 @@ class Left_White_Dragon:
             left_white_dragons.remove(self)
             game_world.remove_object(self)
             sunny.kill_score += 100
+
+        if collide(self, sunny):
+            delay(1)
+            game_framework.change_state(EndingState)

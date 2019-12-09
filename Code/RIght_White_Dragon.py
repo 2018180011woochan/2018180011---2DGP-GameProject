@@ -1,6 +1,7 @@
 from pico2d import*
 import game_world
 import MainState
+import EndingState
 import game_framework
 import Sunny
 
@@ -63,3 +64,7 @@ class Right_White_Dragon:
             right_white_dragons.remove(self)
             game_world.remove_object(self)
             sunny.kill_score += 100
+
+        if collide(self, sunny):
+            delay(1)
+            game_framework.change_state(EndingState)

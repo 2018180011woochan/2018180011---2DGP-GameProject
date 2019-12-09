@@ -2,6 +2,7 @@ from pico2d import*
 import game_world
 import game_framework
 import MainState
+import EndingState
 import Sunny
 import time
 
@@ -57,6 +58,9 @@ class Yello_Dragon:
             game_world.remove_object(self)
             sunny.kill_score += 100
             self.isAlive = False
+        if collide(self, sunny):
+            delay(1)
+            game_framework.change_state(EndingState)
 
     #def remake_yellodragon(self):
      #   self.yellodragons += [Yello_Dragon()]

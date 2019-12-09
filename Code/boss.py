@@ -36,7 +36,7 @@ class Boss:
 
 
     def get_bb(self):
-        return self.x - 50, self.y - 50, self.x + 50, self.y + 50
+        return self.x - 200, self.y - 180, self.x + 200, self.y + 180
 
     def draw(self):
         self.image.draw(self.x, self.y)
@@ -45,7 +45,7 @@ class Boss:
     def update(self):
         sunny = MainState.get_sunny()
         self.y -= RUN_SPEED_PPS
-        if self.y < 400:
+        if self.y < 500:
             self.y += RUN_SPEED_PPS
 
 

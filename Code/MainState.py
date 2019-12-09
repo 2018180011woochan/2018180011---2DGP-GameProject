@@ -56,6 +56,7 @@ def enter():
     #Yello_Dragon = Yello_Dragon()
     game_world.add_object(BackGround1, 0)
     game_world.add_object(Sunny, 1)
+
     game_world.add_object(boss, 1)
     #game_world.add_object(Left_White_Dragon, 2)
     #game_world.add_object(Right_White_Dragon, 2)
@@ -126,9 +127,9 @@ def update():
     current_time = time.time()
     for game_object in game_world.all_objects():
         game_object.update()
- #   if Sunny.collide(Yello_Dragon):
-  #      delay(1)
-   #     game_framework.change_state(EndingState)
+    #if Sunny.collide(Yello_Dragon):
+     #   delay(1)
+      #  game_framework.change_state(EndingState)
     #if Sunny.collide(Left_White_Dragon):
      #   delay(1)
       #  game_framework.change_state(EndingState)
@@ -136,18 +137,22 @@ def update():
     #    delay(1)
      #   game_framework.change_state(EndingState)
 
+
     global yello_dragons
-    if len(yello_dragons) <= 0:
+    sunny = get_sunny()
+    if len(yello_dragons) <= 0 and sunny.kill_score < 10000:
         yello_dragons = [Yello_Dragon(i) for i in range(5)]
         game_world.add_objects(yello_dragons, 1)
 
     global left_white_dragons
-    if len(left_white_dragons) <= 0:
+    sunny = get_sunny()
+    if len(left_white_dragons) <= 0 and sunny.kill_score < 10000:
         left_white_dragons = [Left_White_Dragon(i) for i in range(5)]
         game_world.add_objects(left_white_dragons, 1)
 
     global right_white_dragons
-    if len(right_white_dragons) <= 0:
+    sunny = get_sunny()
+    if len(right_white_dragons) <= 0 and sunny.kill_score < 10000:
         right_white_dragons = [Right_White_Dragon(i) for i in range(5)]
         game_world.add_objects(right_white_dragons, 1)
 
