@@ -30,9 +30,9 @@ sunny = None
 background1 = None
 left_white_dragon = None
 right_white_dragon = None
-yello_dragon = None
 
 Bullets = []
+yello_dragons = []
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -44,17 +44,22 @@ def collide(a, b):
     return True
 
 def enter():
-    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon
+    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon
+    #global Yello_Dragon
     Sunny = Sunny()
     BackGround1 = BackGround1()
     Left_White_Dragon = Left_White_Dragon()
     Right_White_Dragon = Right_White_Dragon()
-    Yello_Dragon = Yello_Dragon()
+    #Yello_Dragon = Yello_Dragon()
     game_world.add_object(BackGround1, 0)
     game_world.add_object(Sunny, 1)
     game_world.add_object(Left_White_Dragon, 2)
     game_world.add_object(Right_White_Dragon, 2)
-    game_world.add_object(Yello_Dragon, 3)
+    #game_world.add_object(Yello_Dragon, 3)
+
+    global yello_dragons
+    yello_dragons = [Yello_Dragon(i) for i in range(5)]
+    game_world.add_objects(yello_dragons, 1)
 
 
 
@@ -103,19 +108,24 @@ def handle_events():
             Sunny.handle_event(event)
 
 def update():
-    global yello_dragon
+
     current_time = time.time()
     for game_object in game_world.all_objects():
         game_object.update()
-    if Sunny.collide(Yello_Dragon):
-        delay(1)
-        game_framework.change_state(EndingState)
+#    if Sunny.collide(Yello_Dragon):
+ #       delay(1)
+  #      game_framework.change_state(EndingState)
     if Sunny.collide(Left_White_Dragon):
         delay(1)
         game_framework.change_state(EndingState)
     if Sunny.collide(Right_White_Dragon):
         delay(1)
         game_framework.change_state(EndingState)
+
+    global yello_dragons
+    if len(yello_dragons) <= 0:
+        yello_dragons = [Yello_Dragon(i) for i in range(5)]
+        game_world.add_objects(yello_dragons, 1)
 
 
     #if Yello_Dragon.isAlive == False:

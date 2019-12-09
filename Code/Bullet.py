@@ -59,9 +59,9 @@ class Bullet:
         if collide(right_white_dragon, self):
             game_world.remove_object(self)
             right_white_dragon.hp -= 20
-        if collide(yello_dragon, self):
-            game_world.remove_object(self)
-            yello_dragon.hp -= 20
+#        if collide(yello_dragon, self):
+ #           game_world.remove_object(self)
+  #          yello_dragon.hp -= 20
 
 
 

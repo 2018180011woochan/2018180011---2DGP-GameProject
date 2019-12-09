@@ -23,7 +23,7 @@ def collide(a, b):
 
 class Yello_Dragon:
     image = None
-    def __init__(self):
+    def __init__(self, x):
         if Yello_Dragon.image == None:
             Yello_Dragon.image = load_image('Yello_Dragon.png')
         self.x = 200
