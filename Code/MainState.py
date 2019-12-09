@@ -22,6 +22,7 @@ from Right_White_Dragon import Right_White_Dragon
 from Yello_Dragon import Yello_Dragon
 from Bullet import Bullet
 from boss import Boss
+from rubee import Rubee
 #from Yello_Dragon import *
 
 
@@ -30,6 +31,7 @@ name = "MainState"
 sunny = None
 background1 = None
 boss = None
+rubee = None
 
 Bullets = []
 yello_dragons = []
@@ -48,6 +50,8 @@ def collide(a, b):
 def enter():
     global Sunny, BackGround1, boss
     #global Yello_Dragon
+    global rubee
+    rubee = Rubee()
     Sunny = Sunny()
     BackGround1 = BackGround1()
     boss = Boss()
@@ -57,7 +61,7 @@ def enter():
     game_world.add_object(BackGround1, 0)
     game_world.add_object(Sunny, 1)
 
-    game_world.add_object(boss, 1)
+    #game_world.add_object(boss, 1)
     #game_world.add_object(Left_White_Dragon, 2)
     #game_world.add_object(Right_White_Dragon, 2)
     #game_world.add_object(Yello_Dragon, 3)
@@ -84,6 +88,9 @@ def exit():
     del Right_White_Dragon
     del Yello_Dragon
     game_world.clear()
+
+def get_rubee():
+    return rubee
 
 def get_boss():
     return boss
@@ -138,6 +145,7 @@ def update():
      #   game_framework.change_state(EndingState)
 
 
+
     global yello_dragons
     sunny = get_sunny()
     if len(yello_dragons) <= 0 and sunny.kill_score < 10000:
@@ -156,6 +164,9 @@ def update():
         right_white_dragons = [Right_White_Dragon(i) for i in range(5)]
         game_world.add_objects(right_white_dragons, 1)
 
+
+    if sunny.kill_score > 10000:
+        game_world.add_object(boss, 1)
 
     #if Yello_Dragon.isAlive == False:
     #    game_world.add_object(yello_dragon, 1)
