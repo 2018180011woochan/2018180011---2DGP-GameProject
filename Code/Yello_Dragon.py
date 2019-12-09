@@ -6,12 +6,13 @@ import EndingState
 import rubee
 import Sunny
 import time
+from rubee import Rubee
 
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
-RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 10.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 def collide(a, b):
@@ -59,8 +60,9 @@ class Yello_Dragon:
             yello_dragons.remove(self)
             game_world.remove_object(self)
             sunny.kill_score += 100
-            rubee.x, rubee.y = self.x, self.y
+            #rubees = [Rubee(i) for i in range(5)]
             game_world.add_object(rubee, 1)
+            rubee.x, rubee.y = self.x, self.y
             self.isAlive = False
         if collide(self, sunny):
             delay(1)

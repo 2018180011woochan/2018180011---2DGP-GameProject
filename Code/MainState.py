@@ -37,6 +37,7 @@ Bullets = []
 yello_dragons = []
 left_white_dragon = []
 right_white_dragon = []
+#rubees = []
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -65,6 +66,10 @@ def enter():
     #game_world.add_object(Left_White_Dragon, 2)
     #game_world.add_object(Right_White_Dragon, 2)
     #game_world.add_object(Yello_Dragon, 3)
+
+    #global rubees
+    #rubees = [Rubee(i) for i in range(5)]
+    #game_world.add_objects(rubees, 1)
 
     global yello_dragons
     yello_dragons = [Yello_Dragon(i) for i in range(5)]
@@ -148,24 +153,24 @@ def update():
 
     global yello_dragons
     sunny = get_sunny()
-    if len(yello_dragons) <= 0 and sunny.kill_score < 10000:
+    if len(yello_dragons) <= 0 and sunny.kill_score < 18000:
         yello_dragons = [Yello_Dragon(i) for i in range(5)]
         game_world.add_objects(yello_dragons, 1)
 
     global left_white_dragons
     sunny = get_sunny()
-    if len(left_white_dragons) <= 0 and sunny.kill_score < 10000:
+    if len(left_white_dragons) <= 0 and sunny.kill_score < 18000:
         left_white_dragons = [Left_White_Dragon(i) for i in range(5)]
         game_world.add_objects(left_white_dragons, 1)
 
     global right_white_dragons
     sunny = get_sunny()
-    if len(right_white_dragons) <= 0 and sunny.kill_score < 10000:
+    if len(right_white_dragons) <= 0 and sunny.kill_score < 18000:
         right_white_dragons = [Right_White_Dragon(i) for i in range(5)]
         game_world.add_objects(right_white_dragons, 1)
 
 
-    if sunny.kill_score > 10000:
+    if sunny.kill_score > 18000:
         game_world.add_object(boss, 1)
 
     #if Yello_Dragon.isAlive == False:

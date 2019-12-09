@@ -55,7 +55,7 @@ class IdleState:
         sunny.x = clamp(25, sunny.x, 800 - 25)
         sunny.bullet_remaketime += game_framework.frame_time * 10
 
-        if int(sunny.bullet_remaketime) >= 3 - sunny.bullet_speed * 0.8:
+        if int(sunny.bullet_remaketime) >= 3 - sunny.bullet_speed * 1.2:
             sunny.fire_bullet()
             sunny.bullet_remaketime = 0
 

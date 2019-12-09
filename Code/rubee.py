@@ -5,6 +5,7 @@ import MainState
 import EndingState
 import Sunny
 import time
+import Yello_Dragon
 
 
 PIXEL_PER_METER = (10.0 / 1.0)
@@ -27,6 +28,7 @@ class Rubee:
     def __init__(self):
         if Rubee.image == None:
             Rubee.image = load_image('rubee.png')
+        yello_dragons = MainState.get_yello_dragons()
         self.x = 0
         self.y = 0
 
