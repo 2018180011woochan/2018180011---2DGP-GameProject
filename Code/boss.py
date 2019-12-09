@@ -1,8 +1,10 @@
 from pico2d import*
 import game_world
-import MainState
 import game_framework
+import MainState
 import Sunny
+import time
+
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -19,15 +21,18 @@ def collide(a, b):
     if bottom_a > top_b: return False
     return True
 
-class Right_White_Dragon:
+class Boss:
     image = None
     def __init__(self, x):
+        if Boss.image == None:
+            Boss.image = load_image('boss.png')
+        self.x = 200
         self.y = 570
-        self.x = 320
         self.dir = 0.15
-        self.hp = 100
-        if Right_White_Dragon.image == None:
-            Right_White_Dragon.image = load_image('Right_White_Dragon.png')
+        self.hp = 10000
+        self.isAlive = True
+
+
 
 
     def get_bb(self):
@@ -36,6 +41,13 @@ class Right_White_Dragon:
     def draw(self):
         self.image.draw(self.x, self.y)
         draw_rectangle(*self.get_bb())
+
+    def update(self):
+        sunny = MainState.get_sunny()
+        self.y -= RUN_SPEED_PPS
+        if self.y < 400:
+            self.y += RUN_SPEED_PPS
+
 
 
     def collide(self, a):
@@ -47,19 +59,3 @@ class Right_White_Dragon:
         if top_a < bottom_b: return False
         if bottom_a > top_b: return False
         return True
-
-
-    def update(self):
-        sunny = MainState.get_sunny()
-        self.y -= RUN_SPEED_PPS
-
-        if self.y < 0:
-            right_white_dragons = MainState.get_right_white_dragons()
-            right_white_dragons.remove(self)
-            game_world.remove_object(self)
-
-        if self.hp <= 0:
-            right_white_dragons = MainState.get_right_white_dragons()
-            right_white_dragons.remove(self)
-            game_world.remove_object(self)
-            sunny.kill_score += 100

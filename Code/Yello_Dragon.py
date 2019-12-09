@@ -27,7 +27,7 @@ class Yello_Dragon:
         if Yello_Dragon.image == None:
             Yello_Dragon.image = load_image('Yello_Dragon.png')
         self.x = 200
-        self.y = 650
+        self.y = 570
         self.dir = 0.15
         self.hp = 100
         self.isAlive = True
@@ -47,15 +47,19 @@ class Yello_Dragon:
         self.y -= RUN_SPEED_PPS
 
         if self.y < 0:
+            yello_dragons = MainState.get_yello_dragons()
+            yello_dragons.remove(self)
             game_world.remove_object(self)
             self.isAlive = False
         if self.hp <= 0:
+            yello_dragons = MainState.get_yello_dragons()
+            yello_dragons.remove(self)
             game_world.remove_object(self)
             sunny.kill_score += 100
             self.isAlive = False
 
-    def remake_yellodragon(self):
-        self.yellodragons += [Yello_Dragon()]
+    #def remake_yellodragon(self):
+     #   self.yellodragons += [Yello_Dragon()]
 
     def collide(self, a):
         left_a, bottom_a, right_a, top_a = a.get_bb()

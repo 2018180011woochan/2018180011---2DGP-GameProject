@@ -45,24 +45,37 @@ class Bullet:
 
 
     def update(self):
-        yello_dragon = MainState.get_yello_dragon()
-        left_white_dragon = MainState.get_left_white_dragon()
-        right_white_dragon = MainState.get_right_white_dragon()
+        yello_dragons = MainState.get_yello_dragons()
+        left_white_dragons = MainState.get_left_white_dragons()
+        right_white_dragons = MainState.get_right_white_dragons()
         # self.y = 70
         self.y += RUN_SPEED_PPS
         if self.y > 600:
             game_world.remove_object(self)
 
-        if collide(left_white_dragon, self):
-            game_world.remove_object(self)
-            left_white_dragon.hp -= 20
-        if collide(right_white_dragon, self):
-            game_world.remove_object(self)
-            right_white_dragon.hp -= 20
-#        if collide(yello_dragon, self):
- #           game_world.remove_object(self)
-  #          yello_dragon.hp -= 20
+  #      if collide(left_white_dragon, self):
+   #         game_world.remove_object(self)
+    #        left_white_dragon.hp -= 20
+     #   if collide(right_white_dragon, self):
+      #      game_world.remove_object(self)
+       #     right_white_dragon.hp -= 20
+ #       if collide(yello_dragons, self):
+  #          game_world.remove_object(self)
+   #         yello_dragons.hp -= 20
+        for yello_dragon in yello_dragons:
+            if collide(yello_dragon, self):
+                game_world.remove_object(self)
+                yello_dragon.hp -= 20
 
+        for left_white_dragon in left_white_dragons:
+            if collide(left_white_dragon, self):
+                game_world.remove_object(self)
+                left_white_dragon.hp -= 20
+
+        for right_white_dragon in right_white_dragons:
+            if collide(right_white_dragon, self):
+                game_world.remove_object(self)
+                right_white_dragon.hp -= 20
 
 
 

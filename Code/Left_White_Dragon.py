@@ -20,10 +20,10 @@ def collide(a, b):
 
 class Left_White_Dragon:
     image = None
-    def __init__(self, y = 650, dir = 0.15):
-        self.y = y
+    def __init__(self, x):
+        self.y = 570
         self.x = 80
-        self.dir = dir
+        self.dir = 0.15
         self.hp = 100
         if Left_White_Dragon.image == None:
             Left_White_Dragon.image = load_image('Left_White_Dragon.png')
@@ -40,6 +40,14 @@ class Left_White_Dragon:
     def update(self):
         sunny = MainState.get_sunny()
         self.y -= RUN_SPEED_PPS
+
+        if self.y < 0:
+            left_white_dragons = MainState.get_left_white_dragons()
+            left_white_dragons.remove(self)
+            game_world.remove_object(self)
+
         if self.hp <= 0:
+            left_white_dragons = MainState.get_left_white_dragons()
+            left_white_dragons.remove(self)
             game_world.remove_object(self)
             sunny.kill_score += 100
