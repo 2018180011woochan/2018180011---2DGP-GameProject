@@ -61,7 +61,7 @@ class boss_bullet:
 
         sunny = MainState.get_sunny()
         if collide(sunny, self):
-            game_framework.quit()
+           game_framework.quit()
 
 
 

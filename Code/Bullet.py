@@ -4,6 +4,7 @@ import game_world
 import game_framework
 import Right_White_Dragon
 import MainState
+import boss
 import Sunny
 
 PIXEL_PER_METER = (10.0 / 0.3)
@@ -41,17 +42,22 @@ class Bullet:
 
     def draw(self):
         self.image.draw(self.x, self.y)
-        #draw_rectangle(*self.get_bb())
+        draw_rectangle(*self.get_bb())
 
 
     def update(self):
         yello_dragons = MainState.get_yello_dragons()
         left_white_dragons = MainState.get_left_white_dragons()
         right_white_dragons = MainState.get_right_white_dragons()
+        boss = MainState.get_boss()
         # self.y = 70
         self.y += RUN_SPEED_PPS
         if self.y > 600:
             game_world.remove_object(self)
+
+        if collide(boss, self):
+            #game_world.remove_object(self)
+            boss.hp -= 20
 
   #      if collide(left_white_dragon, self):
    #         game_world.remove_object(self)
@@ -76,6 +82,8 @@ class Bullet:
             if collide(right_white_dragon, self):
                 game_world.remove_object(self)
                 right_white_dragon.hp -= 20
+
+
 
 
 

@@ -2,7 +2,7 @@ import game_framework
 from pico2d import *
 import MainState
 
-name = "TitleState"
+name = "EndingState"
 image = None
 
 

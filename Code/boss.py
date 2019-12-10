@@ -5,6 +5,7 @@ import MainState
 import Sunny
 import boss_bullet
 import time
+import EndingState
 
 boss_bullet = []
 
@@ -32,7 +33,7 @@ class Boss:
         self.x = 200
         self.y = 570
         self.dir = 0.15
-        self.hp = 10000
+        self.hp = 200000
         self.isAlive = True
         self.boss_bullet_remaketime = 0
         self.boss_bullets = []
@@ -46,21 +47,18 @@ class Boss:
 
     def draw(self):
         self.image.draw(self.x, self.y)
-        #draw_rectangle(*self.get_bb())
+        draw_rectangle(*self.get_bb())
 
     def update(self):
         sunny = MainState.get_sunny()
+
         self.y -= RUN_SPEED_PPS
         if self.y < 500:
             self.y += RUN_SPEED_PPS
 
+        if self.hp <= 0:
+            game_world.remove_object(self)
 
-    def collide(self, a):
-        left_a, bottom_a, right_a, top_a = a.get_bb()
-        left_b, bottom_b, right_b, top_b = self.get_bb()
+            sunny.kill_score += 1000
+            game_framework.quit()
 
-        if left_a > right_b: return False
-        if right_a < left_b: return False
-        if top_a < bottom_b: return False
-        if bottom_a > top_b: return False
-        return True

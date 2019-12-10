@@ -102,12 +102,6 @@ def enter():
 
 
 def exit():
-    global Sunny, BackGround1, Left_White_Dragon, Right_White_Dragon, Yello_Dragon
-    del sunny
-    del BackGround1
-    del Left_White_Dragon
-    del Right_White_Dragon
-    del Yello_Dragon
     game_world.clear()
 
 def get_rubee():
@@ -162,6 +156,7 @@ def handle_events():
             Sunny.handle_event(event)
 
 def update():
+    yello_dragons = get_yello_dragons()
 
     current_time = time.time()
     for game_object in game_world.all_objects():
