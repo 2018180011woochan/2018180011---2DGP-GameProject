@@ -10,6 +10,7 @@ import game_world
 import Sunny
 import Yello_Dragon
 import Bullet
+import boss_bullet
 import Right_White_Dragon
 import EndingState
 import time
@@ -33,6 +34,7 @@ background1 = None
 boss = None
 rubee = None
 
+boss_bullet = []
 Bullets = []
 yello_dragons = []
 left_white_dragon = []
@@ -99,6 +101,9 @@ def get_rubee():
 
 def get_boss():
     return boss
+
+def get_boss_bullet():
+    return boss_bullet
 
 def get_yello_dragons():
     return yello_dragons

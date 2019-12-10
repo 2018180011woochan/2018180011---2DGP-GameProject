@@ -3,8 +3,10 @@ import game_world
 import game_framework
 import MainState
 import Sunny
+import boss_bullet
 import time
 
+boss_bullet = []
 
 PIXEL_PER_METER = (10.0 / 1.0)
 RUN_SPEED_KMPH = 0.1
@@ -31,8 +33,14 @@ class Boss:
         self.dir = 0.15
         self.hp = 10000
         self.isAlive = True
+        self.boss_bullet_remaketime = 0
+        self.boss_bullets = []
+        self.boss_bullet_speed = 2
 
-
+    def do(self):
+        if int(self.boss_bullet_remaketime) >= 3 - self.boss_bullet_speed * 1.2:
+            self.fire_bullet()
+            self.boss_bullet_remaketime = 0
 
 
     def get_bb(self):
@@ -48,7 +56,8 @@ class Boss:
         if self.y < 500:
             self.y += RUN_SPEED_PPS
 
-
+    def fire_bullet(self):
+        self.boss_bullets += [boss_bullet()]
 
     def collide(self, a):
         left_a, bottom_a, right_a, top_a = a.get_bb()
