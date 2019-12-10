@@ -6,9 +6,6 @@ import Right_White_Dragon
 import MainState
 import Sunny
 import boss
-import time
-
-frame_time = 0.0
 
 PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 0.5
@@ -25,7 +22,7 @@ def collide(a, b):
     if bottom_a > top_b: return False
     return True
 
-class boss_bullet:
+class boss_bullet5:
     image = None
     def __init__(self, x):
         boss = MainState.get_boss()
@@ -34,10 +31,9 @@ class boss_bullet:
         self.x = 200
         self.y = 500
         self.attack = 20
-        #self.velocity -= RUN_SPEED_PPS
         #game_world.add_object(self, 1)
-        if boss_bullet.image == None:
-            boss_bullet.image = load_image('boss_bullet.png')
+        if boss_bullet5.image == None:
+            boss_bullet5.image = load_image('boss_bullet.png')
 
     def get_bb(self):
         return self.x-10, self.y-10, self.x+10, self.y+10
@@ -50,13 +46,12 @@ class boss_bullet:
 
 
     def update(self):
-        #self.velocity -= RUN_SPEED_PPS
-        #self.y -= self.velocity * game_framework.frame_time
         self.y -= RUN_SPEED_PPS
+        self.x += 0.4
 
         if self.y < 0:
-            boss_bullets = MainState.get_boss_bullets()
-            boss_bullets.remove(self)
+            boss_bullets5 = MainState.get_boss_bullets5()
+            boss_bullets5.remove(self)
             game_world.remove_object(self)
 
         sunny = MainState.get_sunny()
