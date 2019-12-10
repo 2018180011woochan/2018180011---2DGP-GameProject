@@ -4,6 +4,7 @@ import game_world
 import game_framework
 import Right_White_Dragon
 import MainState
+import Intro_state
 import Sunny
 import boss
 import time
@@ -61,7 +62,8 @@ class boss_bullet:
 
         sunny = MainState.get_sunny()
         if collide(sunny, self):
-           game_framework.quit()
+            delay(1)
+            game_framework.change_state(Intro_state)
 
 
 

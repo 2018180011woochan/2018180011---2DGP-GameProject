@@ -156,7 +156,7 @@ def handle_events():
             Sunny.handle_event(event)
 
 def update():
-    yello_dragons = get_yello_dragons()
+    #yello_dragons = get_yello_dragons()
 
     current_time = time.time()
     for game_object in game_world.all_objects():

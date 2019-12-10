@@ -3,6 +3,7 @@ import game_world
 import game_framework
 import MainState
 import EndingState
+import Intro_state
 import rubee
 import Sunny
 import time
@@ -66,7 +67,7 @@ class Yello_Dragon:
             self.isAlive = False
         if collide(self, sunny):
             delay(1)
-            game_framework.change_state(EndingState)
+            game_framework.change_state(Intro_state)
 
     #def remake_yellodragon(self):
      #   self.yellodragons += [Yello_Dragon()]
