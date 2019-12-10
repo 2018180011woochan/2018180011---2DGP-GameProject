@@ -23,6 +23,7 @@ def collide(a, b):
     if bottom_a > top_b: return False
     return True
 
+
 class Boss:
     image = None
     def __init__(self):
@@ -37,10 +38,7 @@ class Boss:
         self.boss_bullets = []
         self.boss_bullet_speed = 2
 
-    def do(self):
-        if int(self.boss_bullet_remaketime) >= 3 - self.boss_bullet_speed * 1.2:
-            self.fire_bullet()
-            self.boss_bullet_remaketime = 0
+
 
 
     def get_bb(self):
@@ -56,8 +54,6 @@ class Boss:
         if self.y < 500:
             self.y += RUN_SPEED_PPS
 
-    def fire_bullet(self):
-        self.boss_bullets += [boss_bullet()]
 
     def collide(self, a):
         left_a, bottom_a, right_a, top_a = a.get_bb()

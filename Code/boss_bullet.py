@@ -9,7 +9,7 @@ import Sunny
 PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 0.5
 RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
-RUN_SPEED_MPS = (RUN_SPEED_MPM / 10.0)
+RUN_SPEED_MPS = (RUN_SPEED_MPM / 100.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
 def collide(a, b):
@@ -21,17 +21,16 @@ def collide(a, b):
     if bottom_a > top_b: return False
     return True
 
-class Boss_Bullet:
-    def __init__(self):
+class boss_bullet:
+    image = None
+    def __init__(self, x):
         boss = MainState.get_boss()
-        self.image = load_image('boss_bullet.png')
         self.x = boss.x
         self.y = boss.y
         self.attack = 20
         game_world.add_object(self, 1)
-
-    def __del__(self):
-        del self.image
+        if boss_bullet.image == None:
+            boss_bullet.image = load_image('boss_bullet.png')
 
     def get_bb(self):
         return self.x-10, self.y-10, self.x+10, self.y+20
@@ -44,12 +43,11 @@ class Boss_Bullet:
 
 
     def update(self):
-        yello_dragons = MainState.get_yello_dragons()
-        left_white_dragons = MainState.get_left_white_dragons()
-        right_white_dragons = MainState.get_right_white_dragons()
-        # self.y = 70
-        self.y += RUN_SPEED_PPS
+        self.y -= RUN_SPEED_PPS
+
         if self.y < 0:
+            boss_bullets = MainState.get_boss_bullets()
+            #boss_bullets.remove(self)
             game_world.remove_object(self)
         sunny = MainState.get_sunny()
         if collide(sunny, self):

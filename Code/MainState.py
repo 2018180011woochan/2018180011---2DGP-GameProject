@@ -24,6 +24,7 @@ from Yello_Dragon import Yello_Dragon
 from Bullet import Bullet
 from boss import Boss
 from rubee import Rubee
+from boss_bullet import boss_bullet
 #from Yello_Dragon import *
 
 
@@ -34,7 +35,7 @@ background1 = None
 boss = None
 rubee = None
 
-boss_bullet = []
+boss_bullets = []
 Bullets = []
 yello_dragons = []
 left_white_dragon = []
@@ -85,6 +86,10 @@ def enter():
     right_white_dragons = [Right_White_Dragon(i) for i in range(5)]
     game_world.add_objects(right_white_dragons, 1)
 
+    #global boss_bullets
+    #boss_bullets = [boss_bullet(i) for i in range(5)]
+    #game_world.add_objects(boss_bullets, 1)
+
 
 
 def exit():
@@ -102,8 +107,8 @@ def get_rubee():
 def get_boss():
     return boss
 
-def get_boss_bullet():
-    return boss_bullet
+def get_boss_bullets():
+    return boss_bullets
 
 def get_yello_dragons():
     return yello_dragons
@@ -175,8 +180,14 @@ def update():
         game_world.add_objects(right_white_dragons, 1)
 
 
+
+
     if sunny.kill_score > 18000:
         game_world.add_object(boss, 1)
+        global boss_bullets
+        if len(boss_bullets) <= 0:
+            boss_bullets = [boss_bullet(i) for i in range(5)]
+            game_world.add_objects(boss_bullets, 1)
 
     #if Yello_Dragon.isAlive == False:
     #    game_world.add_object(yello_dragon, 1)
