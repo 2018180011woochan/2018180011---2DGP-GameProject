@@ -5,10 +5,11 @@ import game_framework
 import Right_White_Dragon
 import MainState
 import Sunny
+import boss
 
 PIXEL_PER_METER = (10.0 / 0.3)
 RUN_SPEED_KMPH = 0.5
-RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
+RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 150.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 100.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
@@ -27,28 +28,32 @@ class boss_bullet:
         boss = MainState.get_boss()
         self.x = boss.x
         self.y = boss.y
+        #self.x = 320
+        #self.y = 500
         self.attack = 20
-        game_world.add_object(self, 1)
+        #game_world.add_object(self, 1)
         if boss_bullet.image == None:
             boss_bullet.image = load_image('boss_bullet.png')
 
     def get_bb(self):
-        return self.x-10, self.y-10, self.x+10, self.y+20
+        return self.x-10, self.y-10, self.x+10, self.y+10
 
 
 
     def draw(self):
         self.image.draw(self.x, self.y)
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
 
 
     def update(self):
         self.y -= RUN_SPEED_PPS
+        self.x -= RUN_SPEED_PPS
 
         if self.y < 0:
             boss_bullets = MainState.get_boss_bullets()
-            #boss_bullets.remove(self)
+            boss_bullets.remove(self)
             game_world.remove_object(self)
+
         sunny = MainState.get_sunny()
         if collide(sunny, self):
             game_framework.quit()

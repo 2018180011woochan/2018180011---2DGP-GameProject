@@ -43,7 +43,7 @@ class Yello_Dragon:
 
     def draw(self):
         self.image.draw(self.x, self.y)
-        draw_rectangle(*self.get_bb())
+        #draw_rectangle(*self.get_bb())
 
     def update(self):
         sunny = MainState.get_sunny()
