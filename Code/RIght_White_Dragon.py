@@ -62,6 +62,7 @@ class Right_White_Dragon:
         if self.hp <= 0:
             right_white_dragons = MainState.get_right_white_dragons()
             right_white_dragons.remove(self)
+            sunny.boom2(right_white_dragons)
             game_world.remove_object(self)
             sunny.kill_score += 100
 

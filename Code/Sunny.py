@@ -97,7 +97,12 @@ class Sunny:
 
 
     def boom(self, yello_dragons):
+        self.boom_sound.play()
 
+    def boom2(self, right_white_dragon):
+        self.boom_sound.play()
+
+    def boom3(self, left_white_dragons):
         self.boom_sound.play()
 
     def update_state(self):
