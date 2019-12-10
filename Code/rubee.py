@@ -37,7 +37,7 @@ class Rubee:
 
 
     def get_bb(self):
-        return self.x - 5, self.y - 5, self.x + 5, self.y + 5
+        return self.x - 10, self.y - 10, self.x + 10, self.y + 10
 
     def draw(self):
         self.image.draw(self.x, self.y)

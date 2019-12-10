@@ -25,6 +25,8 @@ from Bullet import Bullet
 from boss import Boss
 from rubee import Rubee
 from boss_bullet import boss_bullet
+from boss_bullet2 import boss_bullet2
+from boss_bullet3 import boss_bullet3
 #from Yello_Dragon import *
 
 
@@ -36,6 +38,8 @@ boss = None
 rubee = None
 
 boss_bullets = []
+boss_bullets2 = []
+boss_bullets3 = []
 Bullets = []
 yello_dragons = []
 left_white_dragon = []
@@ -109,6 +113,10 @@ def get_boss():
 
 def get_boss_bullets():
     return boss_bullets
+def get_boss_bullets2():
+    return boss_bullets2
+def get_boss_bullets3():
+    return boss_bullets3
 
 def get_yello_dragons():
     return yello_dragons
@@ -182,12 +190,18 @@ def update():
 
 
 
-    if sunny.kill_score > 18000:
-        game_world.add_object(boss, 1)
-        global boss_bullets
+    if sunny.kill_score > 100:
+        game_world.add_object(boss, 2)
+        global boss_bullets, boss_bullets2, boss_bullets3
         if len(boss_bullets) <= 0:
             boss_bullets = [boss_bullet(i) for i in range(5)]
             game_world.add_objects(boss_bullets, 1)
+        if len(boss_bullets2) <= 0:
+            boss_bullets2 = [boss_bullet2(i) for i in range(5)]
+            game_world.add_objects(boss_bullets2, 1)
+        if len(boss_bullets3) <= 0:
+            boss_bullets3 = [boss_bullet3(i) for i in range(5)]
+            game_world.add_objects(boss_bullets3, 1)
 
     #if Yello_Dragon.isAlive == False:
     #    game_world.add_object(yello_dragon, 1)
