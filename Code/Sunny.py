@@ -1,6 +1,7 @@
 from pico2d import*
 import game_framework
 import game_world
+import MainState
 from Bullet import Bullet
 from Yello_Dragon import Yello_Dragon
 
@@ -70,6 +71,7 @@ class IdleState:
                         '%10.0f' % (sunny.kill_score - (sunny.kill_score % 10)), (255, 255, 255))
 
 
+
 class Sunny:
 
     def __init__(self):
@@ -89,6 +91,14 @@ class Sunny:
         self.font = load_font('HoonDdukbokki.TTF', 30)
         self.final_score = self.fly_distance + self.kill_score
 
+        self.boom_sound = load_music('boom.mp3')
+        self.boom_sound.set_volume(32)
+
+
+
+    def boom(self, yello_dragons):
+
+        self.boom_sound.play()
 
     def update_state(self):
         if len(self.event_que) > 0:

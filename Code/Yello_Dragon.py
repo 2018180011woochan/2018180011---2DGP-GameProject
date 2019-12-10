@@ -59,6 +59,7 @@ class Yello_Dragon:
             yello_dragons = MainState.get_yello_dragons()
             rubee = MainState.get_rubee()
             yello_dragons.remove(self)
+            sunny.boom(yello_dragons)
             game_world.remove_object(self)
             sunny.kill_score += 100
             #rubees = [Rubee(i) for i in range(5)]
